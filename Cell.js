@@ -48,7 +48,29 @@ export default class Cell {
   mergeTiles() {
     if (!this.tile || !this.mergeTile) return;
     this.tile.value = this.tile.value + this.mergeTile.value;
+
+    this.#cellElement.classList.add("merge");
+    console.log("added");
+
+    const removeClassMerge = () => {
+      this.#cellElement.classList.remove("merge");
+      console.log("removed");
+    };
+    this.waitForAnimationEnd().then(removeClassMerge);
+
     this.mergeTile.remove();
     this.mergeTile = null;
+  }
+
+  waitForAnimationEnd() {
+    return new Promise((functionToExecuteAfterAnimationEnd) =>
+      this.#cellElement.addEventListener(
+        "animationend",
+        functionToExecuteAfterAnimationEnd,
+        {
+          once: true,
+        }
+      )
+    );
   }
 }

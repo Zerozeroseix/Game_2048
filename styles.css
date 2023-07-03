@@ -13,6 +13,12 @@ body {
     font-size: 7.5vmin;
 }
 
+.dialog{
+    border-radius: 1rem;
+}
+
+
+
 #game-board {
     display: grid;
     grid-template-rows: repeat(var(--grid-size), var(--cell-size));
@@ -46,7 +52,7 @@ body {
     font-weight: bold;
     background-color: hsl(200, 50%, var(--background-lightness));
     color: hsl(200, 25%, var(--text-lightness));
-    animation: show 200ms ease-in-out;
+    animation: show 900ms ease-in-out;
     transition: 100ms ease-in-out;
 }
 
@@ -54,5 +60,25 @@ body {
     0% {
         opacity: .5;
         transform: scale(0);
+    }
+}
+
+
+.merge {
+    animation: merge 1500ms cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes merge {
+    0% {
+        transform: scale(0.5);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        border: none;
+        transform: scale(1);
     }
 }

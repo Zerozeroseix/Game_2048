@@ -1,5 +1,4 @@
 import Grid from "./Grid.js";
-import Cell from "./Cell.js";
 import Tile from "./Tile.js";
 
 const gameBoard = document.querySelector("#game-board");
@@ -51,8 +50,11 @@ async function handleInput(e) {
   const newTile = new Tile(gameBoard);
   grid.randomEmptyCell().tile = newTile;
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
-    newTile.waitForTransition(true).then(() => alert("You lose"));
-    return;
+    newTile.waitForTransition(true).then(() => {
+      const dialog = document.querySelector("dialog");
+      dialog.showModal();
+      return;
+    });
   }
   setupInput();
 }
